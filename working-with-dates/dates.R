@@ -60,3 +60,55 @@ last_release
 
 # How long since last release?
 Sys.Date() - last_release_date
+
+# Use as.POSIXct to enter the datetime 
+as.POSIXct("2010-10-01 12:12:00")
+
+# Use as.POSIXct again but set the timezone to `"America/Los_Angeles"`
+as.POSIXct("2010-10-01 12:12:00", tz = "America/Los_Angeles")
+
+# Use read_csv to import rversions.csv
+releases <- read_csv("rversions.csv")
+
+# Examine structure of datetime column
+str(releases$datetime)
+
+# Import "cran-logs_2015-04-17.csv" with read_csv()
+logs <- read_csv("cran-logs_2015-04-17.csv")
+
+# Print logs
+logs
+
+# Store the release time as a POSIXct object
+release_time <- as.POSIXct("2015-04-16 07:13:33", tz = "UTC")
+
+# When is the first download of 3.2.0?
+logs %>% 
+  filter(datetime,
+    r_version == "3.2.0")
+
+# Examine histograms of downloads by version
+ggplot(logs, aes(x = datetime)) +
+  geom_histogram() +
+  geom_vline(aes(xintercept = as.numeric(release_time)))+
+  facet_wrap(~ r_version, ncol = 1)
+
+# Import "cran-logs_2015-04-17.csv" with read_csv()
+logs <- read_csv("cran-logs_2015-04-17.csv")
+
+# Print logs
+logs
+
+# Store the release time as a POSIXct object
+release_time <- as.POSIXct("2015-04-16 07:13:33", tz = "UTC")
+
+# When is the first download of 3.2.0?
+logs %>% 
+  filter(datetime > release_time,
+    r_version == "3.2.0")
+
+# Examine histograms of downloads by version
+ggplot(logs, aes(x = datetime)) +
+  geom_histogram() +
+  geom_vline(aes(xintercept = as.numeric(release_time)))+
+  facet_wrap(~ r_version, ncol = 1)

@@ -11,3 +11,24 @@ today() - years(5)
 
 # Subtract a duration of five years from today()
 today() - dyears(5)
+
+# Time of North American Eclipse 2017
+eclipse_2017 <- ymd_hms("2017-08-21 18:26:40")
+
+# Duration of 29 days, 12 hours, 44 mins and 3 secs
+synodic <- ddays(29) + dhours(12) + dminutes(44) + dseconds(3)
+
+# 223 synodic months
+saros <- 223 * synodic
+
+# Add saros to eclipse_2017
+saros + eclipse_2017
+
+# Add a period of 8 hours to today
+today_8am <- today() + hours(8)
+
+# Sequence of two weeks from 1 to 26
+every_two_weeks <- 1:26 * weeks(2)
+
+# Create datetime for every two weeks for a year
+every_two_weeks + today_8am

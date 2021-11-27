@@ -24,3 +24,25 @@ parse_date_time(two_orders, orders = c("mdy", "dmy"))
 # Specify order to include "dOmY", "OmY" and "Y"
 short_dates <- c("11 December 1282", "May 1372", "1253")
 parse_date_time(short_dates, orders = c("d0mY", "0mY", "Y"))
+
+library(lubridate)
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+# Import CSV with read_csv()
+akl_daily_raw <- read_csv("akl_weather_daily.csv")
+
+# Print akl_daily_raw
+akl_daily_raw
+
+# Parse date 
+akl_daily <- akl_daily_raw %>%
+  mutate(date = ymd(date))
+
+# Print akl_daily
+akl_daily
+
+# Plot to check work
+ggplot(akl_daily, aes(x = date, y = max_temp)) +
+  geom_line() 

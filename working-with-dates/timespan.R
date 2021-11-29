@@ -77,3 +77,13 @@ monarchs %>%
 monarchs %>% 
   filter(int_overlaps(halleys_1066$visible, reign)) %>%
   select(name, from, to, dominion)
+
+# New columns for duration and period
+monarchs <- monarchs %>%
+  mutate(
+    duration = as.duration(reign),
+    period = as.period(reign)) 
+    
+# Examine results    
+monarchs %>%
+  select(name,duration,period)

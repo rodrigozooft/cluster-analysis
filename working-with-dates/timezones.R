@@ -67,3 +67,17 @@ microbenchmark(
   fasttime = fastPOSIXct(dates),
   times = 20)
 
+# Head of dates
+head(dates)
+
+# Parse dates with fast_strptime
+fast_strptime(dates, 
+    format = "%Y-%m-%dT%H:%M:%S%z") %>% str()
+
+# Comparse speed to ymd_hms() and fasttime
+microbenchmark(
+  ymd_hms = ymd_hms(dates),
+  fasttime = fastPOSIXct(dates),
+  fast_strptime = fast_strptime(dates, 
+    format = "%Y-%m-%dT%H:%M:%S%z"),
+  times = 20)

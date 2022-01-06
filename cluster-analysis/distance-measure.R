@@ -11,3 +11,25 @@ player2 <- two_players[2, ]
 # Calculate and print their distance using the Euclidean Distance formula
 player_distance <- sqrt( (player1$y - player2$y)^2 + (player1$x - player2$x)^2 )
 player_distance
+
+# Calculate the Distance Between two_players
+dist_two_players <- dist(two_players)
+dist_two_players
+
+# Calculate the Distance Between three_players
+dist_three_players <- dist(three_players)
+dist_three_players
+
+# Calculate distance for three_trees 
+dist_trees <- dist(three_trees)
+
+# Scale three trees & calculate the distance  
+scaled_three_trees <- scale(three_trees)
+dist_scaled_trees <- dist(scaled_three_trees)
+
+# Output the results of both Matrices
+print('Without Scaling')
+dist_trees
+
+print('With Scaling')
+dist_scaled_trees

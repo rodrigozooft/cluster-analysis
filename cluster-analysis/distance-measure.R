@@ -74,3 +74,10 @@ clusters_k2 <- cutree(hc_players, k = 2)
 
 # Create a new data frame storing these results
 lineup_k2_complete <- mutate(lineup, cluster = clusters_k2)
+
+# Count the cluster assignments
+count(lineup_k2_complete, cluster)
+
+# Plot the positions of the players and color them using their cluster
+ggplot(lineup_k2_complete, aes(x = x, y = y, color = factor(cluster))) +
+  geom_point()

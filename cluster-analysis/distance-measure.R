@@ -141,3 +141,18 @@ ggplot(lineup_h20_complete, aes(x = x, y = y, color = factor(cluster))) +
 # Plot the positions of the players and color them using their cluster for height = 40
 ggplot(lineup_h40_complete, aes(x = x, y = y, color = factor(cluster))) +
   geom_point()
+
+# Calculate Euclidean distance between customers
+dist_customers <- dist(customers_spend)
+
+# Generate a complete linkage analysis 
+hc_customers <- hclust(dist_customers, method = "complete")
+
+# Plot the dendrogram
+plot(hc_customers)
+
+# Create a cluster assignment vector at h = 15000
+clust_customers <- cutree(hc_customers, h = 15000)
+
+# Generate the segmented customers data frame
+segment_customers <- mutate(customers_spend, cluster = clust_customers)
